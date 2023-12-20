@@ -12,4 +12,8 @@ jobs:
       - name: List files in the repository
         run: |
           ls -l ${{ github.workspace }}
-      - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
+      - name: Install cowsay
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes cowsay
+      - run: cat README.md | cowsay # Affiche le contenu du fichier `README.md` à la base du dépôt
