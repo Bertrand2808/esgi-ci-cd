@@ -13,14 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: v19.9.0
-      - run: npm ci
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls -l ${{ github.workspace }}
-      - run: cat README.md # Affiche le contenu du fichier `README.md` à la base du dépôt
-      - name: Launch node index.js
+      - name: Launch npm install
         run: |
           npm install
       - name: Launch npm run lint
