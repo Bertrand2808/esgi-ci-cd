@@ -4,19 +4,16 @@ on:
 jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/dduportal/esgi-gitpod
-      options : --user=root
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: v19.9.0
-      - name: Launch npm install
+      - name: Build Docker Image
         run: |
-          npm install
-      - name: Launch npm run lint
+          docker image build --tag=docker-ci:1.0.0 /workspace/esgi-ci-cd/
+      - name: Launch npm run lint in a container
         run: |
-          npm run lint
+           docker container run docker-ci:1.0.0 npm run lint
       
