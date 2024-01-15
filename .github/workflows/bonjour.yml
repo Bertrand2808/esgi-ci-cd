@@ -16,4 +16,8 @@ jobs:
       - name: Launch npm run lint in a container
         run: |
            docker container run docker-ci:1.0.0 npm run lint
+      - name: Check the version of npm in a container
+        run: |
+           docker container run docker-ci:1.0.0 npm --version
+
       
