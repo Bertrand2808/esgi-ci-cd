@@ -12,7 +12,7 @@ jobs:
           node-version: v19.9.0
       - name: Build Docker Image
         run: |
-          docker image build --tag=docker-ci:1.0.0 /workspace/esgi-ci-cd/
+          docker image build --tag=docker-ci:1.0.0 ./
       - name: Launch npm run lint in a container
         run: |
            docker container run docker-ci:1.0.0 npm run lint
