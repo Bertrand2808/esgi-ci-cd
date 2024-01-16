@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
       - uses: actions/setup-node@v4
         with:
           node-version: v19.9.0
