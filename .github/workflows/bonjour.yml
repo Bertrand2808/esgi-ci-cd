@@ -4,6 +4,8 @@ on:
 jobs:
   dire_bonjour:
     runs-on: ubuntu-22.04
+    env:
+      IMAGE_NAME: docker-ci:1.0.0
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -12,13 +14,13 @@ jobs:
           node-version: v19.9.0
       - name: Build Docker Image
         run: |
-          docker image build --tag=docker-ci:1.0.0 ./
+          docker image build --tag="${IMAGE_NAME}" ./
       - name: Launch npm run lint in a container / in a volume
         run: |
-           docker container run --volume="$(pwd)":"$(pwd)" --workdir="$(pwd)" docker-ci:1.0.0 npm run lint
+           docker container run --workdir="$(pwd)" --volume="$(pwd)":"$(pwd)"  "${IMAGE_NAME}" npm run lint
       - name: Check the version of npm in a container
         run: |
-           docker container run --volume="$(pwd)":"$(pwd)" --workdir="$(pwd)" docker-ci:1.0.0 npm --version
+           docker container run --workdir="$(pwd)" --volume="$(pwd)":"$(pwd)"  "${IMAGE_NAME}" npm --version
       - name: Check volumes
         run: |
            docker volume ls
