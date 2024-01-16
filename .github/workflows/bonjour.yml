@@ -13,11 +13,14 @@ jobs:
       - name: Build Docker Image
         run: |
           docker image build --tag=docker-ci:1.0.0 ./
-      - name: Launch npm run lint in a container
+      - name: Launch npm run lint in a container / in a volume
         run: |
-           docker container run docker-ci:1.0.0 npm run lint
+           docker container run --volume /workspace/:app docker-ci:1.0.0 npm run lint
       - name: Check the version of npm in a container
         run: |
-           docker container run docker-ci:1.0.0 npm --version
+           docker container run --volume /workspace/:app docker-ci:1.0.0 npm --version
+      - name: Check volumes
+        run: |
+           docker volume ls
 
       
